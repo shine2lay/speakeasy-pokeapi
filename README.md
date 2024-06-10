@@ -122,6 +122,7 @@ It could be useful to not have to track the offsets.
 Depending on the user and use cases, It might be nice to extract out abstractions that would make it easier to get related data to the object.
 This is a very rough idea of what I am thinking, assuming we are working with all endpoints rather than just the two required
 
+The main idea is to have the main domain as classes and have methods within it that fetches related data to that domain object.
 ```
 Pokemon.getByAbilities()
 Pokemon.getByMoves()
