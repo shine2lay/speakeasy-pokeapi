@@ -1,5 +1,5 @@
 {
-  "name": "speakeasy-pokeapi-sdk",
+  "name": "@shine2lay/speakeasy-pokeapi-sdk",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

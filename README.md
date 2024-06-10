@@ -9,13 +9,13 @@ for further details into the api, use this link: https://pokeapi.co/docs/v2#poke
 ## Installation
 install this repo as a module
 ```shell
-yarn add '<this-github-repo-url>'
+yarn add @shine2lay/speakeasy-pokeapi-sdk
 ```
 ## Usage
 You'll first create an instance of PokeApi
 
 ```typescript
-import {PokeApi} from '<this-github-repo-url>';
+import {PokeApi} from '@shine2lay/speakeasy-pokeapi-sdk';
 
 
 const main = async () => {
@@ -27,7 +27,7 @@ const main = async () => {
             retryDelayFactor: 2,
         },
         logLevel: 'info',
-    }) // note this is the default values
+    }) // note these are the default values
 
     const response = await pokeApi.api.Pokemon.get('pikachu')
     
@@ -80,7 +80,7 @@ I implemented the main exported class of PokeApi as a singleton allowing users t
 A few reasons behind this: 
 - Allow one single point of entry thus easier to make sure configuration and other data passed in is consistent
 - If the sdk later implement web sockets, we can make sure there is only one connection
-- Make sure cache and other resources are properly created and utilized.
+- Make sure cache and other resources are properly created and utilized without duplicates.
 
 ### Code and Folder structure
 Although, we only have two endpoint in this particular case, I wanted to at least set up a structure that would allow new endpoints to be added relatively easily.
@@ -91,7 +91,8 @@ I did spend some time trying to think of ways we can potentially abstract / comb
 However, I did end up ultimately deciding to just straight forward approach of naming and calling the endpoints as they were designed in pokeapi.
 There are a few reasons for this:
 - This one is stemming from my personal experiences. When I am looking up api docs and if the API function call name is different from the endpoint described, It gets very confusing.
-- The api end points seems very straightforward, I had a hard time trying to think of abstractions that would make sense from a logical perspective. Which could also be because I don't know the intended users and their use cases for this specific sdk.
+- The api end points seems very straightforward, I had a hard time trying to think of abstractions that would make sense from a logical perspective. Which could also be because I don't know the intended users and their use cases for this specific sdk with only 2 endpoints.
+- I do think even if we add abstractions, we still should expose the raw endpoints for more advanced users.
 
 ### Logging && Caching
 I wanted to point out two tools/lib (aside from typical typescript scaffolding) I am utilizing
@@ -118,7 +119,9 @@ if I could return the result of a query with an object that have `next()` functi
 It could be useful to not have to track the offsets. 
 
 ### Abstraction 
-Depending on the user and use cases, It might be nice to extract out abstractions such as
+Depending on the user and use cases, It might be nice to extract out abstractions that would make it easier to get related data to the object.
+This is a very rough idea of what I am thinking, assuming we are working with all endpoints rather than just the two required
+
 ```
 Pokemon.getByAbilities()
 Pokemon.getByMoves()
@@ -132,7 +135,6 @@ Item('potion').cost()
 Item.getAllByGeneration()
 ```
 
-I think this could be helpful if the use cases for easily grab related items / events. But it will definitely requires more 
-endpoints than the two required for this repo.
-
+### Unit testing
+I only managed to implement a few integration tests within the time limit, but I think it would be nice to have more unit tests to test the individual functions.
 

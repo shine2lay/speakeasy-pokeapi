@@ -3,7 +3,6 @@ import {Generation} from "../../src/api/Generation";
 import {Pokemon} from "../../src/api/Pokemon";
 import nock from "nock";
 
-// These are integration tests, so we need to mock the network requests
 describe('PokeApi Tests', () => {
     test('should correctly merge provided configuration', () => {
         const customConfig = {
@@ -31,6 +30,7 @@ describe('PokeApi Tests', () => {
     });
 });
 
+// These are integration tests, so we need to mock the network requests
 describe('PokeApi API Call Handling Tests', () => {
     beforeAll(() => {
         nock('https://pokeapi.co/api/v2')
