@@ -17,8 +17,3 @@ type SdkConfig = {
   };
   logLevel: string;
 };
-
-type getApiOptions = {
-  limit?: number;
-  offset?: number;
-};
